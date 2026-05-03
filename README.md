@@ -30,22 +30,43 @@ in seconds.
 
 - **Name:** CWRU Bearing Fault Dataset
 - **Source:** Case Western Reserve University
-- **Samples:** 4600 (perfectly balanced)
+- **Samples:** 4600 total
 - **Classes:** 10 fault conditions
 - **Sampling Rate:** 48,000 samples/second
+- **Format:** NPZ file (32×32 per sample)
 
-| Class | Description | Samples |
-|-------|-------------|---------|
-| Normal | Healthy bearing | 460 |
-| Ball_007 | Ball fault - small | 460 |
-| Ball_014 | Ball fault - medium | 460 |
-| Ball_021 | Ball fault - large | 460 |
-| IR_007 | Inner Race - small | 460 |
-| IR_014 | Inner Race - medium | 460 |
-| IR_021 | Inner Race - large | 460 |
-| OR_007 | Outer Race - small | 460 |
-| OR_014 | Outer Race - medium | 460 |
-| OR_021 | Outer Race - large | 460 |
+| Class | Description | Crack Size | Samples |
+|-------|-------------|------------|---------|
+| Normal | Healthy bearing | None | 460 |
+| Ball_007 | Ball fault | 0.007 inch | 460 |
+| Ball_014 | Ball fault | 0.014 inch | 460 |
+| Ball_021 | Ball fault | 0.021 inch | 460 |
+| IR_007 | Inner Race fault | 0.007 inch | 460 |
+| IR_014 | Inner Race fault | 0.014 inch | 460 |
+| IR_021 | Inner Race fault | 0.021 inch | 460 |
+| OR_007 | Outer Race fault | 0.007 inch | 460 |
+| OR_014 | Outer Race fault | 0.014 inch | 460 |
+| OR_021 | Outer Race fault | 0.021 inch | 460 |
+
+Dataset is perfectly balanced 
+No missing values 
+No duplicate samples 
+
+
+##  Exploratory Data Analysis (EDA)
+
+### What I Checked:
+
+**Data Quality:**
+- Missing values → None found 
+- Duplicate samples → None found 
+- Class balance → Perfect 460 each 
+- Data type → Float64 correct 
+
+**Signal Analysis:**
+- Boxplot → Shows amplitude spread per class
+- Histogram → Shows value distribution
+- Heatmap → Shows feature correlations
 
 ##  Features
 
@@ -58,6 +79,8 @@ in seconds.
 -  Confusion matrix visualization
 -  Time vs Frequency domain comparison
 -  Training history visualization
+-  Boxplot outlier detection
+-  Feature correlation heatmap
 
 
 ##  Technologies Used
@@ -78,20 +101,44 @@ in seconds.
 |------|-------------|
 | Cell 1 | Libraries & Setup |
 | Cell 2 | Data Upload & Analysis |
-| Cell 3 | Time Domain Feature Extraction |
-| Cell 4 | WPT Application |
-| Cell 5 | Data Preparation (Split & Scale) |
-| Cell 6 | ML Models (RF + SVM) |
-| Cell 7 | Deep Learning Model (MLP) |
-| Cell 8 | Confusion Matrix Heatmaps |
-| Cell 9 | FFT Conversion to Frequency Domain |
-| Cell 10 | Frequency Feature Extraction |
-| Cell 11 | WPT on Frequency Domain |
-| Cell 12 | Frequency Data Preparation |
-| Cell 13 | Frequency ML Models |
-| Cell 14 | Frequency DL Model |
-| Cell 15 | Frequency Confusion Matrix |
-| Cell 16 | Final Comparison |
+| Cell 3 | Missing Values & Duplicate |
+| Cell 4 | Statistical Analysis|
+| Cell 5 | Boxplot Outlier Detection |
+| Cell 6 | Histogram Distribution|
+| Cell 7 | Time Domain Feature Extraction |
+| Cell 8 | WPT Application |
+| Cell 9 | Data Preparation (Split & Scale) |
+| Cell 10 | ML Models (RF + SVM) |
+| Cell 11 | Deep Learning Model (MLP) |
+| Cell 12 | Confusion Matrix Heatmaps |
+| Cell 13| FFT Conversion to Frequency Domain |
+| Cell 14 | Frequency Feature Extraction |
+| Cell 15 | WPT on Frequency Domain |
+| Cell 16 | Frequency Data Preparation |
+| Cell 17 | Frequency ML Models |
+| Cell 18 | Frequency DL Model |
+| Cell 19 | Frequency Confusion Matrix |
+| Cell 20 | Final Comparison |
+
+##  Models Used
+
+### Baseline Models:
+**Random Forest:**
+- 200 decision trees vote together
+- Best for tabular feature data
+- Explainable predictions
+- Fast training (5 seconds)
+
+**SVM:**
+- RBF kernel for curved boundaries
+- Separates 10 classes using
+  One vs Rest strategy
+- Proven on bearing fault research
+
+### Advanced Model:
+**MLP Deep Learning:**
+
+
 
 ##  How To Run
 
@@ -107,9 +154,17 @@ in seconds.
 # All other libraries are 
 # pre-installed in Google Colab
 ```
-
 # Overall Best = Deep Learning on Time Domain
    Accuracy     = 97.39%
    Test Samples = 920
+# Summary
+#  Domain Comparisons
+Time Domain → better for DL
+Raw signal is complex
+DL finds hidden patterns! 
+
+Frequency Domain → better for RF
+FFT cleans and organizes data
+RF reads clear patterns directly! 
 
 ##  Complete 
