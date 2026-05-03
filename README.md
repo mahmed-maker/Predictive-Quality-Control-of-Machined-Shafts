@@ -112,4 +112,4 @@ in seconds.
    Accuracy     = 97.39%
    Test Samples = 920
 
-## ⚙️ Complete Pipeline
+##  Complete 
